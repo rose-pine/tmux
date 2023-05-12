@@ -44,7 +44,7 @@ main() {
   source /dev/stdin <<<"$(sed -e "/^[^#].*=/s/^/local /" "${PLUGIN_DIR}/palletes/rose-pine-${theme}.tmuxtheme")"
 
   # Status bar
-  set status "on"
+  set "status" "on"
   set status-style "fg=${thm_iris},bg=${thm_base}"
   set monitor-activity "on"
   set status-justify "left"
