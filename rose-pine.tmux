@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
+PLUGIN_DIR="$HOME/.tmux/plugins/tmux"
 #
 # Rosé Pine - tmux theme
 # 
 # Inspired by powerline/powerline, catppucin/tmux & challenger-deep-theme/tmux
 #
 
-PLUGIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd )"
 
 get_tmux_option() {
     local option value default
@@ -34,14 +34,14 @@ setw() {
 
 main() {
     local theme
-    theme="$(get_tmux_option "@rose_pine_flavour" "rose-pine-default")"
+    theme="$(get_tmux_option "@rose_pine_flavour" "base")"
 
     # Aggregating all commands into a single array
     local tmux_commands=()
 
    # Pulling in the selected theme by the theme that's being set as local in .tmux.conf 
    # variables
-  source /dev/stdin <<<"$(sed -e "/^[^#].*=/s/^/local /" "${PLUGIN_DIR}/tmux/palletes/rose-pine-${theme}.tmuxtheme")"
+  source /dev/stdin <<<"$(sed -e "/^[^#].*=/s/^/local /" "${PLUGIN_DIR}/palletes/rose-pine-${theme}.tmuxtheme")"
 
   # Status bar
   set status "on"
@@ -51,17 +51,17 @@ main() {
   set status-right-length "120"
 
   # Theoretically messages (need to figure out color placement) 
-  set message-style "fg=${thm_??},bg=${thm_??},align=centre"
-  set message-command-style "fg=${thm_??},bg=${thm_??},align=centre"
+  set message-style "fg=${thm_surface},bg=${thm_overlay},align=centre"
+  set message-command-style "fg=${thm_surface},bg=${thm_overlay},align=centre"
 
   # Pane styling
-  set pane-border-style "fg=${thm_??}"
-  set pane-active-border-style "fg=${thm_??}"
+  set pane-border-style "fg=${thm_subtle}"
+  set pane-active-border-style "fg=${thm_hl_high}"
 
   # Windows
-  setw window-status-activity-style "fg=$(thm_??),bg=${thm_??},none"
+  setw window-status-activity-style "fg=$(thm_hl_high),bg=${thm_hl_mid},none"
   setw window-status-separator ""
-  setw window-status-style "fg=${thm_??},bg=${thm_??}"
+  setw window-status-style "fg=${thm_hl_low},bg=${thm_hl_mid}"
 
 
   # Statusline configuration
@@ -93,7 +93,7 @@ main() {
   # These variables are the defaults so that the setw and set calls are easier to parse
 
   local show_directory
-  readonly show_directory="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red]"
+  readonly show_directory="#[fg=$thm_rose,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics]  #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} #{?client_prefix,#[fg=$thm_red]"
 
   local show_window
   readonly show_window="#[fg=$thm_pink,bg=$thm_bg,nobold,nounderscore,noitalics]$right_separator#[fg=$thm_bg,bg=$thm_pink,nobold,nounderscore,noitalics] #[fg=$thm_fg,bg=$thm_gray] #W #{?client_prefix,#[fg=$thm_red]"
@@ -102,25 +102,25 @@ main() {
   readonly show_session="#[fg=$thm_green]}#[bg=$thm_gray]$right_separator#{?client_prefix,#[bg=$thm_red],#[bg=$thm_green]}#[fg=$thm_bg] #[fg=$thm_fg,bg=$thm_gray] #S "
 
   local show_directory_in_window_status
-  readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_blue] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} "
+  readonly show_directory_in_window_status="#[fg=$thm_bg,bg=$thm_foam] #I #[fg=$thm_fg,bg=$thm_gray] #{b:pane_current_path} "
 
   local show_directory_in_window_status_current
   readonly show_directory_in_window_status_current="#[fg=$thm_bg,bg=$thm_orange] #I #[fg=$thm_fg,bg=$thm_bg] #{b:pane_current_path} "
 
   local show_window_in_window_status
-  readonly show_window_in_window_status="#[fg=$thm_fg,bg=$thm_bg] #W #[fg=$thm_bg,bg=$thm_blue] #I#[fg=$thm_blue,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
+  readonly show_window_in_window_status="#[fg=$thm_fg,bg=$thm_bg] #W #[fg=$thm_bg,bg=$thm_foam] #I#[fg=$thm_foam,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
 
   local show_window_in_window_status_current
   readonly show_window_in_window_status_current="#[fg=$thm_fg,bg=$thm_gray] #W #[fg=$thm_bg,bg=$thm_orange] #I#[fg=$thm_orange,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
 
   local show_user
-  readonly show_user="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] #(whoami) "
+  readonly show_user="#[fg=$thm_foam,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_foam] #[fg=$thm_fg,bg=$thm_gray] #(whoami) "
 
   local show_host
-  readonly show_host="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue]󰒋 #[fg=$thm_fg,bg=$thm_gray] #H "
+  readonly show_host="#[fg=$thm_foam,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_foam]󰒋 #[fg=$thm_fg,bg=$thm_gray] #H "
 
   local show_date_time
-  readonly show_date_time="#[fg=$thm_blue,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_blue] #[fg=$thm_fg,bg=$thm_gray] $date_time "
+  readonly show_date_time="#[fg=$thm_foam,bg=$thm_gray]$right_separator#[fg=$thm_bg,bg=$thm_foam] #[fg=$thm_fg,bg=$thm_gray] $date_time "
 
 
   #Right column 1 shows, by default, the window name
@@ -164,8 +164,8 @@ main() {
 
   # tmux integrated modes 
 
-  setw clock-mode-colour "${thm_??}"
-  setw mode-style "fg=${thm_??}"
+  setw clock-mode-colour "${thm_love}"
+  setw mode-style "fg=${thm_gold}"
 
   tmux "${tmux_commands[@]}"
 
