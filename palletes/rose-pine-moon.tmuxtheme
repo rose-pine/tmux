@@ -1,0 +1,17 @@
+# Setting colors for Rosé Pine Moon theme:
+
+thm_base="#232136"
+thm_surface="#2a273f"
+thm_overlay="#393552"
+thm_muted="#6e6a86"
+thm_subtle="#908caa"
+thm_text="#e0def4"
+thm_love="#eb6f92"
+thm_gold="#f6c177"
+thm_rose="#ea9a97"
+thm_pine="#3e8fb0"
+thm_foam="#9ccfd8"
+thm_iris="#c4a7e7"
+thm_hl_low="#2a283e"
+thm_hl_med="#44415a"
+thm_hl_high="#56526e"

@@ -13,9 +13,20 @@
 
 ## Usage
 
-1. Open App
-2. Under settings, import `rose-pine.theme`
-3. Select `Rosé Pine` from the themes dropdown
+1. Install [TPM](https://github.com/tmux-plugins/tpm)
+2. Add the Rosé Pine plugin with the following lines:
+
+```bash
+set -g @plugin 'rose-pine/tmux'
+# ... alongside
+set -g @plugin 'tmux-plugins/tpm'
+```
+
+3. (Optional) Set your preferred flavour, it defaults to `"base"`:
+
+```bash
+set -g @rose_pine_flavour 'base' # Options are 'base', 'moon' or 'dawn'
+```
 
 ## Gallery
 
