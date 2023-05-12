@@ -31,6 +31,7 @@ set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
 ```
 
 ## Gallery
+
 > Still working on it
 ![Rosé Pine with tmux](https://github.com/mrs4ndman/tmux/assets/121260905/be7f7e2c-57c1-4e92-8f6a-7b7a4dfcb1f3)
 
@@ -39,3 +40,6 @@ set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
 
 - [MrSandman](https://github.com/mrs4ndman)
 
+- [Catppuccin for tmux](https://github.com/catppuccin/tmux) ([license](https://github.com/catppuccin/tmux/blob/4e48b09a76829edc7b55fbb15467cf0411f07931/LICENSE))
+
+- [mcanueste](https://github.com/mcanueste/rose-pine-tmux) ([license](https://github.com/mcanueste/rose-pine-tmux/blob/715de6925992ab9f7162fcfefc1d3ba1510d187a/LICENSE))
