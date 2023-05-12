@@ -1,1 +1,1 @@
-#Rose-pine theme for tmux
+# Rose-pine theme for tmux
