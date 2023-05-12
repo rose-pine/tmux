@@ -17,7 +17,8 @@
 2. Add the Rosé Pine plugin with the following lines:
 
 ```bash
-set -g @plugin 'rose-pine/tmux'
+set -g @plugin 'mrs4ndman/tmux'
+# Temporally set to mrs4ndman until rose-pine repo integration
 # ... alongside
 set -g @plugin 'tmux-plugins/tpm'
 ```
