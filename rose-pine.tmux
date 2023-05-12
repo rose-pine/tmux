@@ -3,7 +3,7 @@ PLUGIN_DIR="$HOME/.tmux/plugins/tmux"
 #
 # Rosé Pine - tmux theme
 # 
-# Inspired by powerline/powerline, catppucin/tmux & challenger-deep-theme/tmux
+# Inspired by dracula/tmux, catppucin/tmux & challenger-deep-theme/tmux
 #
 
 
@@ -41,7 +41,7 @@ main() {
 
    # Pulling in the selected theme by the theme that's being set as local in .tmux.conf 
    # variables
-  source /dev/stdin <<<"$(sed -e "/^[^#].*=/s/^/local /" "${PLUGIN_DIR}/palletes/rose-pine-${theme}.tmuxtheme")"
+  source /dev/stdin <<<"$(sed -e "/^[^#].*=/s/^/local /" "${PLUGIN_DIR}/palettes/rose-pine-${theme}.tmuxtheme")"
 
   # Status bar
   set "status" "on"

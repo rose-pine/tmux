@@ -11,7 +11,7 @@
 
             - dawn - Rose Pine dawn colorschem
 
-                - They are available in the palletes/rose-pine-{theme}.tmuxtheme format
+                - They are available in the palettes/rose-pine-{theme}.tmuxtheme format
 
         - Colorscheme: Thanks to [mcanueste](https://github.com/mcanueste/rose-pine-tmux)'s colorscheme advances, I was able to set them accordingly
 
