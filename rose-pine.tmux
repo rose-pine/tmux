@@ -34,7 +34,7 @@ setw() {
 
 main() {
     local theme
-    theme="$(get_tmux_option "@rose_pine_flavour" "base")"
+    theme="$(get_tmux_option "@rose_pine_variant" "main")"
 
     # Aggregating all commands into a single array
     local tmux_commands=()

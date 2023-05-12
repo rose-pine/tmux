@@ -14,19 +14,20 @@
 ## Usage
 
 1. Install [TPM](https://github.com/tmux-plugins/tpm)
+
 2. Add the Rosé Pine plugin with the following lines:
 
 ```bash
 set -g @plugin 'mrs4ndman/tmux'
-# Temporally set to mrs4ndman until rose-pine repo integration
 # ... alongside
 set -g @plugin 'tmux-plugins/tpm'
+# To update plugin for future revisions, do the "Prefix + U" keycombo
 ```
 
-3. (Optional) Set your preferred flavour, it defaults to `"base"`:
+3. (Optional) Set your preferred variant, it defaults to `"main"`:
 
 ```bash
-set -g @rose_pine_flavour 'base' # Options are 'base', 'moon' or 'dawn'
+set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
 ```
 
 ## Gallery
