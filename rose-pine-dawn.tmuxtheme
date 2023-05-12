@@ -1,0 +1,17 @@
+# Setting colors for default Rosé Pine theme:
+
+set-option -g @rose-pine-base "#faf4ed"
+set-option -g @rose-pine-surface "#fffaf3"
+set-option -g @rose-pine-overlay "#f2e9e1"
+set-option -g @rose-pine-muted "#9893a5"
+set-option -g @rose-pine-subtle "#797593"
+set-option -g @rose-pine-text "#575279"
+set-option -g @rose-pine-love "#b4367a"
+set-option -g @rose-pine-gold "#ea9d34"
+set-option -g @rose-pine-rose "#d7827e"
+set-option -g @rose-pine-pine "#286983"
+set-option -g @rose-pine-foam "#56949f"
+set-option -g @rose-pine-iris "#907aa9"
+set-option -g @rose-pine-hl-low "#f4ede8"
+set-option -g @rose-pine-hl-med "#dfdad9"
+set-option -g @rose-pine-hl-high "#cecacd"

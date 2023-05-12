@@ -1,4 +1,10 @@
-#!/usr/bin/env bash
+#
+# Rosé Pine - tmux theme
+# 
+# Inspired by powerline/powerline & challenger-deep-theme/tmux
+#
 
-CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-tmux bind-key T run-shell "$CURRENT_DIR/scripts/rose-pine.sh"
+# tmux status update interval
+set -g status-interval 1
+
+# 

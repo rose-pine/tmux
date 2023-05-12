@@ -23,7 +23,7 @@
 
 ## Thanks to
 
-- [You, it's you!](https://github.com/<username>)
+- [MrSandman](https://github.com/mrs4ndman)
 
 ## Contributing
 
