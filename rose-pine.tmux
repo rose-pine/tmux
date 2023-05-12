@@ -41,7 +41,7 @@ main() {
 
    # Pulling in the selected theme by the theme that's being set as local in .tmux.conf 
    # variables
-  source /dev/stdin <<<"$(sed -e "/^[^#].*=/s/^/local /" "${PLUGIN_DIR}/palletes/rose-pine-${theme}.tmuxtheme")"
+  source /dev/stdin <<<"$(sed -e "/^[^#].*=/s/^/local /" "${PLUGIN_DIR}/tmux/palletes/rose-pine-${theme}.tmuxtheme")"
 
   # Status bar
   set status "on"
