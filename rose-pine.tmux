@@ -44,22 +44,22 @@ main() {
   source /dev/stdin <<<"$(sed -e "/^[^#].*=/s/^/local /" "${PLUGIN_DIR}/palletes/rose-pine-${theme}.tmuxtheme")"
 
   # Status bar
-  set -g status "on"
-  set -g status-style "fg=${thm_iris},bg=${thm_base}"
-  set -g monitor-activity "on"
-  set -g status-justify "left"
-  set -g status-left-length "100"
-  set -g status-right-length "100"
+  set status "on"
+  set status-style "fg=${thm_iris},bg=${thm_base}"
+  set monitor-activity "on"
+  set status-justify "left"
+  set status-left-length "100"
+  set status-right-length "100"
 
   # Theoretically messages (need to figure out color placement) 
-  set -g message-style "fg=${thm_base},bg=${thm_gold},align=centre"
-  set -g message-command-style "fg=${thm_base},bg=${thm_gold},align=centre"
+  set message-style "fg=${thm_base},bg=${thm_gold},align=centre"
+  set message-command-style "fg=${thm_base},bg=${thm_gold},align=centre"
 
   # Pane styling
-  set -g pane-border-style "fg=${thm_hl_low}"
-  set -g pane-active-border-style "fg=${thm_hl_high}"
-  set -g display-panes-active-colour "${thm_text}"
-  set -g display-panes-colour "${thm_gold}"
+  set pane-border-style "fg=${thm_hl_low}"
+  set pane-active-border-style "fg=${thm_hl_high}"
+  set display-panes-active-colour "${thm_text}"
+  set display-panes-colour "${thm_gold}"
 
   # Windows
   setw window-status-separator ""
@@ -158,9 +158,9 @@ main() {
   fi
 
 
-  set -g status-left "#[fg=${thm_iris},bg=${thm_base}]"
+  set status-left "#[fg=${thm_iris},bg=${thm_base}]"
 
-  set -g status-right "${right_column1},${right_column2}"
+  set status-right "${right_column1},${right_column2}"
 
   setw window-status-format "${window_status_format}"
 
