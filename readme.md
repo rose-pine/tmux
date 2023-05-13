@@ -18,7 +18,7 @@
 2. Add the Rosé Pine plugin with the following lines:
 
 ```bash
-set -g @plugin 'mrs4ndman/tmux'
+set -g @plugin 'rose-pine/tmux'
 # ... alongside
 set -g @plugin 'tmux-plugins/tpm'
 # To update plugin for future revisions, do the "Prefix + U" keycombo
@@ -37,11 +37,24 @@ set -g @rose_pine_date_time '' # %c is a good value but
 # You can insert as an option a value that the date command accepts (man date for info)
 ```
 
-5. Currently working on more modularity and powerline aspect toggle
+
+> 5. Currently working on more modularity and powerline aspect toggle
+
 
 ## Gallery
 
-![Rosé Pine with tmux](https://github.com/mrs4ndman/tmux/assets/121260905/be7f7e2c-57c1-4e92-8f6a-7b7a4dfcb1f3)
+- Main
+
+![image](https://github.com/rose-pine/tmux/assets/121260905/3b29156c-6499-4d8f-a845-3fc276b1347f)
+
+- Moon
+
+![image](https://github.com/rose-pine/tmux/assets/121260905/9df20bca-0f0c-49fa-a678-141ffd50e8dd)
+
+- Dawn (almost the same in the picture as main, but used different hex colours)
+
+![image](https://github.com/rose-pine/tmux/assets/121260905/991a6c42-1a00-4143-92d8-f7d23ede6375)
+
 
 
 ## Thanks to
