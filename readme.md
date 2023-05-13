@@ -30,9 +30,17 @@ set -g @plugin 'tmux-plugins/tpm'
 set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
 ```
 
+4. Also optional but recommended: Activate the extra modules, they are enabled by writing 'on' after the option name
+```bash
+set -g @rose_pine_host 'on'
+set -g @rose_pine_date_time '' # %c is a good value but 
+# You can insert as an option a value that the date command accepts (man date for info)
+```
+
+5. Currently working on more modularity and powerline aspect toggle
+
 ## Gallery
 
-> Still working on it
 ![Rosé Pine with tmux](https://github.com/mrs4ndman/tmux/assets/121260905/be7f7e2c-57c1-4e92-8f6a-7b7a4dfcb1f3)
 
 
