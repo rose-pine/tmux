@@ -13,6 +13,8 @@
 
 ## Usage
 
+> NOTE: It uses a [Nerdfont](https://www.nerdfonts.com/font-downloads) for the icons, so it is recommended to have a Nerdfont set as your terminal font
+
 1. Install [TPM](https://github.com/tmux-plugins/tpm)
 
 2. Add the Rosé Pine plugin with the following lines:
