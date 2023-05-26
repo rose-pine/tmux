@@ -26,7 +26,7 @@ set -g @plugin 'tmux-plugins/tpm'
 # To update plugin for future revisions, do the "Prefix + U" keycombo
 ```
 
-3. (Optional) Set your preferred variant, it defaults to `"main"`:
+3. Set your preferred variant:
 
 ```bash
 set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
