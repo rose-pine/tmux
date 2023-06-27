@@ -182,7 +182,7 @@ fi
   readonly show_host=" #[fg=$thm_text]#H #[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]󰒋"
 
   local show_date_time
-  readonly show_date_time="$field_separator#[fg=$thm_foam]$date_time #[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]"
+  readonly show_date_time="$field_separator#[fg=$thm_foam]$date_time #[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]󰃰"
 
   local show_directory
   readonly show_directory=" #[fg=$thm_subtle] #[fg=$thm_rose]#{b:pane_current_path} #{?client_prefix,$spacer#[fg=${thm_love}]$right_separator#[fg=$thm_bg] $field_separator"
