@@ -49,11 +49,11 @@ set -g @rose_pine_date_time '' # %c is a good value but
 
 ![image](https://github.com/rose-pine/tmux/assets/121260905/3b29156c-6499-4d8f-a845-3fc276b1347f)
 
-- Moon
+- Dawn
 
 ![image](https://github.com/rose-pine/tmux/assets/121260905/9df20bca-0f0c-49fa-a678-141ffd50e8dd)
 
-- Dawn (almost the same in the picture as main, but used different hex colours)
+- Moon (almost the same in the picture as main, but used different hex colours)
 
 ![image](https://github.com/rose-pine/tmux/assets/121260905/991a6c42-1a00-4143-92d8-f7d23ede6375)
 
