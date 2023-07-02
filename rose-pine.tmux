@@ -237,7 +237,7 @@ fi
 
   set status-right "$right_column1$right_column2"
 
-  set status-interval 1
+  set -g status-interval 1
 
   setw window-status-format "$window_status_format"
 
