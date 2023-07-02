@@ -164,10 +164,10 @@ fi
   # These variables are the defaults so that the setw and set calls are easier to parse
 
   local show_window
-  readonly show_window=" #[fg=$thm_subtle] #[fg=$thm_rose]#W$left_separator"
+  readonly show_window=" #[fg=$thm_subtle] #[fg=$thm_rose]#W$spacer"
 
   local show_window_in_window_status
-  readonly show_window_in_window_status="#[fg=$thm_fg,bg=$thm_bg] #W #[fg=$thm_bg,bg=$thm_foam] #I#[fg=$thm_foam,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
+  readonly show_window_in_window_status="#[fg=$thm_bg,bg=$thm_foam] #I#[fg=$thm_foam,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_fg,bg=$thm_bg]#W"
 
   local show_window_in_window_status_current
   readonly show_window_in_window_status_current="#[fg=$thm_fg] #W #[fg=$thm_bg] #I#[fg=$thm_orange,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
@@ -237,7 +237,7 @@ fi
 
   set status-right "$right_column1$right_column2"
 
-  set -g status-interval 1
+  # set -g status-interval 1
 
   setw window-status-format "$window_status_format"
 
