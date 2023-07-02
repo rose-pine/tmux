@@ -77,21 +77,21 @@ if [[ $theme == main ]]; then
 
     elif [[ $theme == moon ]]; then
 
-        thm_base="#191724"; # Used for
-        thm_surface="#1f1d2e"; # Used for
-        thm_overlay="#26233a";# Used for
+        thm_base="#232136"; # Used for
+        thm_surface="#2a273f"; # Used for
+        thm_overlay="#393552";# Used for
         thm_muted="#6e6a86"; # Used for
         thm_subtle="#908caa"; # Used for
         thm_text="#e0def4"; # Used for
         thm_love="#eb6f92"; # Used for
         thm_gold="#f6c177"; # Used for
-        thm_rose="#ebbcba"; # Used for
-        thm_pine="#31748f"; # Used for
+        thm_rose="#ea9a97"; # Used for
+        thm_pine="#3e8fb0"; # Used for
         thm_foam="#9ccfd8"; # Used for
         thm_iris="#c4a7e7"; # Used for
-        thm_hl_low="#21202e"; # Used for
-        thm_hl_med="#403d52"; # Used for
-        thm_hl_high="#524f67"; # Used for
+        thm_hl_low="#2a283e"; # Used for
+        thm_hl_med="#44415a"; # Used for
+        thm_hl_high="#56526e"; # Used for
 
 fi
     # Aggregating all commands into a single array
