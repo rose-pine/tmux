@@ -41,25 +41,24 @@ set -g @rose_pine_left_separator ' > ' # The strings to use as separators are 1-
 set -g @rose_pine_right_separator ' < ' # Accepts both normal chars & nerdfont icons
 set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it changes with prefix + I
 ```
-- The separator options should go back to the defaults ( →, ← and | ) if you close all tmux sessions (a full restart)
+- The separator options should go back to the defaults ( →, ← and | NerdFont characters) if you close all tmux sessions (a full restart)
 
-> 5. Currently working on more modularity and powerline aspect toggle
+> 5. Currently working on more modularity and powerline aspect toggle. Will try to enable NerdFont substitution
 
 
 ## Gallery
 
 - Main
 
-![image](https://github.com/rose-pine/tmux/assets/121260905/3b29156c-6499-4d8f-a845-3fc276b1347f)
+![image](https://github.com/rose-pine/tmux/assets/121260905/184514d9-08fe-453b-a664-3cd6ccab0d4a)
+
+- Moon
+
+![image](https://github.com/rose-pine/tmux/assets/121260905/e2665eb6-280b-48a2-ab45-163d2eb21050)
 
 - Dawn
 
-![image](https://github.com/rose-pine/tmux/assets/121260905/9df20bca-0f0c-49fa-a678-141ffd50e8dd)
-
-- Moon (almost the same in the picture as main, but used different hex colours)
-
-![image](https://github.com/rose-pine/tmux/assets/121260905/991a6c42-1a00-4143-92d8-f7d23ede6375)
-
+![image](https://github.com/rose-pine/tmux/assets/121260905/b194e552-cb15-4296-b459-e1da521aad8c)
 
 
 ## Thanks to
