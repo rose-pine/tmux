@@ -34,11 +34,14 @@ set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
 
 4. Also optional but recommended: Activate the extra modules, they are enabled by writing 'on' after the option name
 ```bash
-set -g @rose_pine_host 'on'
-set -g @rose_pine_date_time '' # %c is a good value but 
-# You can insert as an option a value that the date command accepts (man date for info)
+set -g @rose_pine_host 'on' # Enables hostname in the status bar
+set -g @rose_pine_date_time '' # It accepts the date UNIX command format (man date for info)
+set -g @rose_pine_window_tabs_enabled 'on' # Enables a symbol to separate window number from window name
+set -g @rose_pine_left_separator ' > ' # The strings to use as separators are 1-space padded
+set -g @rose_pine_right_separator ' < ' # Accepts both normal chars & nerdfont icons
+set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it changes with prefix + I
 ```
-
+- The separator options should go back to the defaults ( →, ← and | ) if you close all tmux sessions (a full restart)
 
 > 5. Currently working on more modularity and powerline aspect toggle
 
