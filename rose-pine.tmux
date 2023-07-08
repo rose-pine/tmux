@@ -41,57 +41,57 @@ main() {
 
     if [[ $theme == main ]]; then
 
-        thm_base="#191724"; # Used for
-        thm_surface="#1f1d2e"; # Used for
-        thm_overlay="#26233a"; # Used for
-        thm_muted="#6e6a86"; # Used for
-        thm_subtle="#908caa"; # Used for
-        thm_text="#e0def4"; # Used for
-        thm_love="#eb6f92"; # Used for
-        thm_gold="#f6c177"; # Used for
-        thm_rose="#ebbcba"; # Used for
-        thm_pine="#31748f"; # Used for
-        thm_foam="#9ccfd8"; # Used for
-        thm_iris="#c4a7e7"; # Used for
-        thm_hl_low="#21202e"; # Used for
-        thm_hl_med="#403d52"; # Used for
-        thm_hl_high="#524f67"; # Used for
+        thm_base="#191724";
+        thm_surface="#1f1d2e";
+        thm_overlay="#26233a";
+        thm_muted="#6e6a86";
+        thm_subtle="#908caa";
+        thm_text="#e0def4";
+        thm_love="#eb6f92";
+        thm_gold="#f6c177";
+        thm_rose="#ebbcba";
+        thm_pine="#31748f";
+        thm_foam="#9ccfd8";
+        thm_iris="#c4a7e7";
+        thm_hl_low="#21202e";
+        thm_hl_med="#403d52";
+        thm_hl_high="#524f67";
 
     elif [[ $theme == dawn ]]; then
 
-        thm_base="#faf4ed"; # Used for
-        thm_surface="#fffaf3"; # Used for
-        thm_overlay="#f2e9e1"; # Used for
-        thm_muted="#9893a5"; # Used for
-        thm_subtle="#797593"; # Used for
-        thm_text="#575279"; # Used for
-        thm_love="#b4367a"; # Used for
-        thm_gold="#ea9d34"; # Used for
-        thm_rose="#d7827e"; # Used for
-        thm_pine="#286983"; # Used for
-        thm_foam="#56949f"; # Used for
-        thm_iris="#907aa9"; # Used for
-        thm_hl_low="#f4ede8"; # Used for
-        thm_hl_med="#dfdad9"; # Used for
-        thm_hl_high="#cecacd"; # Used for
+        thm_base="#faf4ed";
+        thm_surface="#fffaf3";
+        thm_overlay="#f2e9e1";
+        thm_muted="#9893a5";
+        thm_subtle="#797593";
+        thm_text="#575279";
+        thm_love="#b4367a";
+        thm_gold="#ea9d34";
+        thm_rose="#d7827e";
+        thm_pine="#286983";
+        thm_foam="#56949f";
+        thm_iris="#907aa9";
+        thm_hl_low="#f4ede8";
+        thm_hl_med="#dfdad9";
+        thm_hl_high="#cecacd";
 
     elif [[ $theme == moon ]]; then
 
-        thm_base="#232136"; # Used for
-        thm_surface="#2a273f"; # Used for
-        thm_overlay="#393552";# Used for
-        thm_muted="#6e6a86"; # Used for
-        thm_subtle="#908caa"; # Used for
-        thm_text="#e0def4"; # Used for
-        thm_love="#eb6f92"; # Used for
-        thm_gold="#f6c177"; # Used for
-        thm_rose="#ea9a97"; # Used for
-        thm_pine="#3e8fb0"; # Used for
-        thm_foam="#9ccfd8"; # Used for
-        thm_iris="#c4a7e7"; # Used for
-        thm_hl_low="#2a283e"; # Used for
-        thm_hl_med="#44415a"; # Used for
-        thm_hl_high="#56526e"; # Used for
+        thm_base="#232136";
+        thm_surface="#2a273f";
+        thm_overlay="#393552";
+        thm_muted="#6e6a86";
+        thm_subtle="#908caa";
+        thm_text="#e0def4";
+        thm_love="#eb6f92";
+        thm_gold="#f6c177";
+        thm_rose="#ea9a97";
+        thm_pine="#3e8fb0";
+        thm_foam="#9ccfd8";
+        thm_iris="#c4a7e7";
+        thm_hl_low="#2a283e";
+        thm_hl_med="#44415a";
+        thm_hl_high="#56526e";
 
     fi
 
@@ -161,7 +161,6 @@ main() {
     local spacer
     spacer=" "
 
-
     # These variables are the defaults so that the setw and set calls are easier to parse
 
     local show_window
@@ -194,11 +193,9 @@ main() {
     local show_directory_in_window_status_current
     readonly show_directory_in_window_status_current=" #I #[fg=$thm_iris,bg=$thm_bg] #{b:pane_current_path}"
 
+    # Left column placement: Determined by the set status-left on line 231
 
-    # Left column placement: Determined by the set status-left on line 236
-
-
-    #Right columns organization:
+    # Right columns organization:
 
     # Right column 1 shows, by default, the username
     local right_column1=$show_user
@@ -210,12 +207,10 @@ main() {
     local window_status_format=$show_directory_in_window_status
     local window_status_current_format=$show_directory_in_window_status_current
 
-
     if [[ "$wt_enabled" == "on" ]]; then
         window_status_format=$show_window_in_window_status
         window_status_current_format=$show_window_in_window_status
     fi
-
 
     if [[ "$host" == "on" ]]; then
         right_column1=$right_column1$show_host
@@ -242,7 +237,6 @@ main() {
     setw window-status-format "$window_status_format"
 
     setw window-status-current-format "$window_status_current_format"
-
 
     # tmux integrated modes 
 
