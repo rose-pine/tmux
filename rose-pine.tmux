@@ -39,6 +39,9 @@ main() {
     local theme
     theme="$(get_tmux_option "@rose_pine_variant" "")"
 
+    # INFO: Not removing the thm_hl_low and thm_hl_med colors for posible features
+    # INFO: If some variables appear unused, they are being used either externally
+    # or in the plugin's features
     if [[ $theme == main ]]; then
 
         thm_base="#191724";
@@ -164,13 +167,14 @@ main() {
     # These variables are the defaults so that the setw and set calls are easier to parse
 
     local show_window
-    readonly show_window=" #[fg=$thm_subtle] #[fg=$thm_rose]#W$spacer"
+    readonly show_window=" #[fg=$thm_subtle] #[fg=$thm_rose]#W$spacer "
 
     local show_window_in_window_status
-    readonly show_window_in_window_status="#[fg=$thm_bg,bg=$thm_foam] #I#[fg=$thm_foam,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics]#[fg=$thm_fg,bg=$thm_bg]#W"
+    readonly show_window_in_window_status="#I#[fg=$thm_foam,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
+    # TODO: Test this thoroughly when I have time, for now it works
     local show_window_in_window_status_current
-    readonly show_window_in_window_status_current="#[fg=$thm_fg] #W #[fg=$thm_bg] #I#[fg=$thm_orange,bg=$thm_bg]$left_separator#[fg=$thm_fg,bg=$thm_bg,nobold,nounderscore,noitalics] "
+    readonly show_window_in_window_status_current="#I#[fg=$thm_love,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
     local show_session
     readonly show_session=" #[fg=$thm_text] #[fg=$thm_text]#S "
@@ -185,13 +189,16 @@ main() {
     readonly show_date_time="$field_separator#[fg=$thm_foam]$date_time#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]󰃰"
 
     local show_directory
-    readonly show_directory=" #[fg=$thm_subtle] #[fg=$thm_rose]#{b:pane_current_path} #{?client_prefix,$spacer#[fg=${thm_love}]$right_separator#[fg=$thm_bg] $field_separator"
+    readonly show_directory=" #[fg=$thm_subtle] #[fg=$thm_rose]#{b:pane_current_path}"
+    # TODO: Implement a mode to toggle the directory show style and remove thm_bg
+    # The appended code that wasn't working and is the second style:
+    # $spacer#[fg=${thm_love}]$right_separator#[fg=$thm_bg] $field_separator
 
     local show_directory_in_window_status
-    readonly show_directory_in_window_status="#[fg=$thm_bg] #I #[fg=$thm_fg] #{b:pane_current_path} "
+    readonly show_directory_in_window_status="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
 
     local show_directory_in_window_status_current
-    readonly show_directory_in_window_status_current=" #I #[fg=$thm_iris,bg=$thm_bg] #{b:pane_current_path}"
+    readonly show_directory_in_window_status_current="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
 
     # Left column placement: Determined by the set status-left on line 231
 
@@ -207,9 +214,13 @@ main() {
     local window_status_format=$show_directory_in_window_status
     local window_status_current_format=$show_directory_in_window_status_current
 
+    # This option toggles between the default (current directory for the window's pane)
+    # and the $wt_enabled option, which is the tmux default behaviour
+    # Will make it 2 options instead of 1 :)
     if [[ "$wt_enabled" == "on" ]]; then
         window_status_format=$show_window_in_window_status
-        window_status_current_format=$show_window_in_window_status
+        window_status_current_format=$show_window_in_window_status_current
+        # TODO: Test this thoroughly when I have time, for now it works
     fi
 
     if [[ "$host" == "on" ]]; then
@@ -235,7 +246,6 @@ main() {
     # set -g status-interval 1
 
     setw window-status-format "$window_status_format"
-
     setw window-status-current-format "$window_status_current_format"
 
     # tmux integrated modes 
