@@ -37,12 +37,15 @@ set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
 set -g @rose_pine_host 'on' # Enables hostname in the status bar
 set -g @rose_pine_date_time '' # It accepts the date UNIX command format (man date for info)
 set -g @rose_pine_window_tabs_enabled 'on' # When active, show program instead of current directory
+set -g @rose_pine_bar_bg_disabls 'on' 
+# If set to 'on', disables background color, for transparent terminal emulators
+
 set -g @rose_pine_left_separator ' > ' # The strings to use as separators are 1-space padded
 set -g @rose_pine_right_separator ' < ' # Accepts both normal chars & nerdfont icons
-set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it changes with prefix + I
+set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it updates with prefix + I
 ```
 - The separator options should go back to the defaults ( →, ← and | NerdFont characters) if you close all tmux sessions (a full restart)
-- The window_tabs_enabled setting (which I believe is the default tmux behavior) requires a full tmux restart (close all sessions and open again)
+- Both the `@rose_pine_window_tabs_enabled` and `@rose_pine_bar_bg_disable` operate like the separators.
 
 > 5. Currently working on more modularity and powerline aspect toggle. Will try to enable NerdFont substitution
 

@@ -152,6 +152,10 @@ main() {
     wt_enabled="$(get_tmux_option "@rose_pine_window_tabs_enabled" "off")"
     readonly wt_enabled
 
+    local bar_bg_disable
+    bar_bg_disable="$(get_tmux_option "@rose_pine_bar_bg_disable" "")"
+    readonly bar_bg_disable
+
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
 
@@ -170,11 +174,10 @@ main() {
     readonly show_window=" #[fg=$thm_subtle] #[fg=$thm_rose]#W$spacer "
 
     local show_window_in_window_status
-    readonly show_window_in_window_status="#I#[fg=$thm_foam,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
+    show_window_in_window_status="#[fg=$thm_iris]#I#[fg=$thm_iris,]$left_separator#[fg=$thm_iris]#W"
 
-    # TODO: Test this thoroughly when I have time, for now it works
     local show_window_in_window_status_current
-    readonly show_window_in_window_status_current="#I#[fg=$thm_love,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
+    show_window_in_window_status_current="#I#[fg=$thm_gold,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
     local show_session
     readonly show_session=" #[fg=$thm_text] #[fg=$thm_text]#S "
@@ -214,13 +217,19 @@ main() {
     local window_status_format=$show_directory_in_window_status
     local window_status_current_format=$show_directory_in_window_status_current
 
+    # This if statement allows the bg colors to be null if the user decides so
+    if [[ "$bar_bg_disable" == "on" ]]; then 
+        set status-style "fg=$thm_pine,bg=0"
+        show_window_in_window_status="#[fg=$thm_iris,bg=0]#I#[fg=$thm_iris,bg=0]$left_separator#[fg=$thm_iris,bg=0]#W"
+        show_window_in_window_status_current="#I#[fg=$thm_gold,bg=0]$left_separator#[fg=$thm_gold,bg=0]#W"
+    fi
+
     # This option toggles between the default (current directory for the window's pane)
     # and the $wt_enabled option, which is the tmux default behaviour
     # Will make it 2 options instead of 1 :)
     if [[ "$wt_enabled" == "on" ]]; then
         window_status_format=$show_window_in_window_status
         window_status_current_format=$show_window_in_window_status_current
-        # TODO: Test this thoroughly when I have time, for now it works
     fi
 
     if [[ "$host" == "on" ]]; then
