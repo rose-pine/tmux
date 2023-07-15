@@ -221,7 +221,7 @@ main() {
     if [[ "$bar_bg_disable" == "on" ]]; then 
         set status-style "fg=$thm_pine,bg=0"
         show_window_in_window_status="#[fg=$thm_iris,bg=0]#I#[fg=$thm_iris,bg=0]$left_separator#[fg=$thm_iris,bg=0]#W"
-        show_window_in_window_status_current="#I#[fg=$thm_gold,bg=0]$left_separator#[fg=$thm_gold,bg=0]#W"
+        show_window_in_window_status_current="#[fg=$thm_gold,bg=0]#I#[fg=$thm_gold,bg=0]$left_separator#[fg=$thm_gold,bg=0]#W"
     fi
 
     # This option toggles between the default (current directory for the window's pane)
