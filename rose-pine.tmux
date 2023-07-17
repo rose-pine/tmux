@@ -106,8 +106,8 @@ main() {
     set status-style "fg=$thm_pine,bg=$thm_base"
     set monitor-activity "on"
     set status-justify "left"
-    set status-left-length "100"
-    set status-right-length "100"
+    set status-left-length "200"
+    set status-right-length "140"
 
     # Theoretically messages (need to figure out color placement) 
     set message-style "fg=$thm_muted,bg=$thm_base,align=centre"
@@ -127,11 +127,6 @@ main() {
 
     # Statusline base command configuration: No need to touch anything here
     # Placement is handled below
-
-    # NOTE: Checking for the value of @rose_pine_window_tabs_enabled
-    local window
-    window="$(get_tmux_option "@rose_pine_current_window" "")"
-    readonly window
 
     local user
     user="$(get_tmux_option "@rose_pine_user" "")"
@@ -156,6 +151,15 @@ main() {
     bar_bg_disable="$(get_tmux_option "@rose_pine_bar_bg_disable" "")"
     readonly bar_bg_disable
 
+    local prioritize_windows
+    prioritize_windows="$(get_tmux_option "@rose_pine_prioritize_windows" "")"
+
+    local user_window_width
+    user_window_width="$(get_tmux_option "@rose_pine_width_to_hide" "")"
+
+    local user_window_count
+    user_window_count="$(get_tmux_option "@rose_pine_window_count" "")"
+
     local right_separator
     right_separator="$(get_tmux_option "@rose_pine_right_separator" "  ")"
 
@@ -171,7 +175,7 @@ main() {
     # These variables are the defaults so that the setw and set calls are easier to parse
 
     local show_window
-    readonly show_window=" #[fg=$thm_subtle] #[fg=$thm_rose]#W$spacer "
+    readonly show_window=" #[fg=$thm_subtle] #[fg=$thm_rose]#W$spacer"
 
     local show_window_in_window_status
     show_window_in_window_status="#[fg=$thm_iris]#I#[fg=$thm_iris,]$left_separator#[fg=$thm_iris]#W"
@@ -186,16 +190,13 @@ main() {
     readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]"
 
     local show_host
-    readonly show_host=" #[fg=$thm_text]#H #[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]󰒋"
+    readonly show_host="$field_separator#[fg=$thm_text]#H#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]󰒋"
 
     local show_date_time
     readonly show_date_time="$field_separator#[fg=$thm_foam]$date_time#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]󰃰"
 
     local show_directory
-    readonly show_directory=" #[fg=$thm_subtle] #[fg=$thm_rose]#{b:pane_current_path}"
-    # TODO: Implement a mode to toggle the directory show style and remove thm_bg
-    # The appended code that wasn't working and is the second style:
-    # $spacer#[fg=${thm_love}]$right_separator#[fg=$thm_bg] $field_separator
+    readonly show_directory="$spacer#[fg=$thm_subtle] #[fg=$thm_rose]#{b:pane_current_path} "
 
     local show_directory_in_window_status
     readonly show_directory_in_window_status="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
@@ -207,11 +208,8 @@ main() {
 
     # Right columns organization:
 
-    # Right column 1 shows, by default, the username
-    local right_column1=$show_user
-
-    # Right column 2 shows, by default, the current directory you're working on
-    local right_column2=$spacer$show_directory
+    # Right column shows nothing by default
+    local right_column
 
     # Window status by default shows the current directory basename
     local window_status_format=$show_directory_in_window_status
@@ -232,26 +230,41 @@ main() {
         window_status_current_format=$show_window_in_window_status_current
     fi
 
+    if [[ "$user" == "on" ]]; then
+        right_column=$right_column$show_user
+    fi
+
     if [[ "$host" == "on" ]]; then
-        right_column1=$right_column1$show_host
+        right_column=$right_column$show_host
     fi
 
     if [[ "$date_time" != "" ]]; then
-        right_column1=$right_column1$show_date_time
+        right_column=$right_column$show_date_time
     fi
 
-    # if [[ "$user" == "on" ]]; then
-    #     right_column1=$right_column1$show_user
-    # fi
-    #
-    # if [[ "$directory" == "on" ]]; then
-    #     right_column1=$right_column1$show_directory
-    # fi
+    if [[ "$directory" == "on" ]]; then
+        right_column=$right_column$show_directory
+    fi
+
+    set status-right "$right_column"
 
     set status-left "$show_session$show_window"
 
-    set status-right "$right_column1$right_column2"
+    local current_window_count
+    current_window_count=$(tmux list-windows | wc -l)
 
+    local current_window_width
+    current_window_width=$(tmux display -p "#{window_width}")
+
+    if [[ "$prioritize_windows" == on ]]; then
+        if [[ "$current_window_count" -gt "$user_window_count" || "$current_window_width" -lt "$user_window_width" ]]; then
+            set status-left "$show_session$show_window$show_directory"
+            # set status-right "$show_directory"
+            set status-right ""
+        fi
+    else
+        set status-right "$right_column"
+    fi
     # set -g status-interval 1
 
     setw window-status-format "$window_status_format"

@@ -43,9 +43,17 @@ set -g @rose_pine_bar_bg_disabls 'on'
 set -g @rose_pine_left_separator ' > ' # The strings to use as separators are 1-space padded
 set -g @rose_pine_right_separator ' < ' # Accepts both normal chars & nerdfont icons
 set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it updates with prefix + I
+set -g @rose_pine_host 'on' # Turn on the hostname component in the statusbar
+set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
+
+# Very beta and specific opt-in settings, tested on v3.2a, look at issue #10
+set -g @rose_pine_prioritize_windows 'on' # Disables the right side functionality in a certain window count / terminal width
+set -g @rose_pine_width_to_hide '80' # Specify a terminal width to toggle off most of the right side functionality
+set -g @rose_pine_window_count '5' # Specify a number of windows, if there are more than the number, do the same as width_to_hide
 ```
 - The separator options should go back to the defaults ( →, ← and | NerdFont characters) if you close all tmux sessions (a full restart)
 - Both the `@rose_pine_window_tabs_enabled` and `@rose_pine_bar_bg_disable` operate like the separators.
+- The `@rose_pine_width_to_hide` and `rose_pine_window_count` settings do not refresh automatically. They need to be refreshed manually, their current state is discussed [here](https://github.com/rose-pine/tmux/issues/10).
 
 > 5. Currently working on more modularity and powerline aspect toggle. Will try to enable NerdFont substitution
 
