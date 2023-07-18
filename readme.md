@@ -23,7 +23,7 @@
 set -g @plugin 'rose-pine/tmux'
 # ... alongside
 set -g @plugin 'tmux-plugins/tpm'
-# To update plugin for future revisions, do the "Prefix + U" keycombo
+# To update plugin for future revisions or bug fixes, do the "Prefix + U" keycombo
 ```
 
 3. Set your preferred variant:
@@ -36,26 +36,34 @@ set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
 ```bash
 set -g @rose_pine_host 'on' # Enables hostname in the status bar
 set -g @rose_pine_date_time '' # It accepts the date UNIX command format (man date for info)
+set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
 set -g @rose_pine_window_tabs_enabled 'on' # When active, show program instead of current directory
 set -g @rose_pine_bar_bg_disabls 'on' 
 # If set to 'on', disables background color, for transparent terminal emulators
 
+# Example values for these can be:
 set -g @rose_pine_left_separator ' > ' # The strings to use as separators are 1-space padded
 set -g @rose_pine_right_separator ' < ' # Accepts both normal chars & nerdfont icons
 set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it updates with prefix + I
-set -g @rose_pine_host 'on' # Turn on the hostname component in the statusbar
-set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
+
+# These are not padded
+set -g @rose_pine_session_icon '' # Changes the default icon to the left of the session name
+set -g @rose_pine_current_window_icon '' # Changes the default icon to the left of the active window name
+set -g @rose_pine_folder_icon '' # Changes the default icon to the left of the current directory folder
+set -g @rose_pine_username_icon '' # Changes the default icon to the right of the hostname
+set -g @rose_pine_hostname_icon '󰒋' # Changes the default icon to the right of the hostname
+set -g @rose_pine_date_time_icon '󰃰' # Changes the default icon to the right of the date module
+set -g @rose_pine_window_status_separator "  " # Changes the default icon that appears between window names
 
 # Very beta and specific opt-in settings, tested on v3.2a, look at issue #10
 set -g @rose_pine_prioritize_windows 'on' # Disables the right side functionality in a certain window count / terminal width
 set -g @rose_pine_width_to_hide '80' # Specify a terminal width to toggle off most of the right side functionality
 set -g @rose_pine_window_count '5' # Specify a number of windows, if there are more than the number, do the same as width_to_hide
 ```
-- The separator options should go back to the defaults ( →, ← and | NerdFont characters) if you close all tmux sessions (a full restart)
+- The separator options should go back to the defaults ( →, ← and | NerdFont characters) if the options are unset and you close all tmux sessions (a full restart)
 - Both the `@rose_pine_window_tabs_enabled` and `@rose_pine_bar_bg_disable` operate like the separators.
 - The `@rose_pine_width_to_hide` and `rose_pine_window_count` settings do not refresh automatically. They need to be refreshed manually, their current state is discussed [here](https://github.com/rose-pine/tmux/issues/10).
 
-> 5. Currently working on more modularity and powerline aspect toggle. Will try to enable NerdFont substitution
 
 
 ## Gallery

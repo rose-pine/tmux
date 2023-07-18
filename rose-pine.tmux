@@ -107,7 +107,7 @@ main() {
     set monitor-activity "on"
     set status-justify "left"
     set status-left-length "200"
-    set status-right-length "140"
+    set status-right-length "200"
 
     # Theoretically messages (need to figure out color placement) 
     set message-style "fg=$thm_muted,bg=$thm_base,align=centre"
@@ -128,28 +128,69 @@ main() {
     # Statusline base command configuration: No need to touch anything here
     # Placement is handled below
 
+    # Shows username of the user the tmux session is run by
     local user
     user="$(get_tmux_option "@rose_pine_user" "")"
     readonly user
 
+    # Shows hostname of the computer the tmux session is run on
     local host
     host="$(get_tmux_option "@rose_pine_host" "")"
     readonly host
 
+    # Date and time command: follows the date UNIX command structure
     local date_time
     date_time="$(get_tmux_option "@rose_pine_date_time" "")"
     readonly date_time
 
+    # Shows truncated current working directory
     local directory
     directory="$(get_tmux_option "@rose_pine_directory" "")"
 
+    # Changes between directory or current program for the window name
     local wt_enabled
     wt_enabled="$(get_tmux_option "@rose_pine_window_tabs_enabled" "off")"
     readonly wt_enabled
 
+    # Changes the background color for the current active window
+    # TODO: Together with line 251-269, end development for this feature
+    # local active_window_color
+    # active_window_color="$(get_tmux_option "@rose_pine_active_window_color" "")"
+    # readonly active_window_color
+
+    # Transparency enabling for status bar
     local bar_bg_disable
     bar_bg_disable="$(get_tmux_option "@rose_pine_bar_bg_disable" "")"
     readonly bar_bg_disable
+
+    # Settings that allow user to choose their own icons and status bar behaviour
+    # START
+    local current_window_icon
+    current_window_icon="$(get_tmux_option "@rose_pine_current_window_icon" "")"
+    readonly current_window_icon
+
+    local current_session_icon
+    current_session_icon="$(get_tmux_option "@rose_pine_session_icon" "")"
+    readonly current_session_icon
+
+    local username_icon
+    username_icon="$(get_tmux_option "@rose_pine_username_icon" "")"
+    readonly username_icon
+
+    local hostname_icon
+    hostname_icon="$(get_tmux_option "@rose_pine_hostname_icon" "󰒋")"
+    readonly hostname_icon
+
+    local date_time_icon
+    date_time_icon="$(get_tmux_option "@rose_pine_date_time_icon" "󰃰")"
+    readonly date_time_icon
+
+    local current_folder_icon
+    current_folder_icon="$(get_tmux_option "@rose_pine_folder_icon" "")"
+    readonly current_folder_icon
+
+    local window_status_separator
+    window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  ")"
 
     local prioritize_windows
     prioritize_windows="$(get_tmux_option "@rose_pine_prioritize_windows" "")"
@@ -169,13 +210,16 @@ main() {
     local field_separator
     field_separator="$(get_tmux_option "@rose_pine_field_separator" " | " )"
 
+    # END
+
     local spacer
     spacer=" "
+    # I know, stupid, right? For some reason, spaces aren't consistent
 
     # These variables are the defaults so that the setw and set calls are easier to parse
 
     local show_window
-    readonly show_window=" #[fg=$thm_subtle] #[fg=$thm_rose]#W$spacer"
+    readonly show_window=" #[fg=$thm_subtle]$current_window_icon #[fg=$thm_rose]#W$spacer"
 
     local show_window_in_window_status
     show_window_in_window_status="#[fg=$thm_iris]#I#[fg=$thm_iris,]$left_separator#[fg=$thm_iris]#W"
@@ -184,25 +228,45 @@ main() {
     show_window_in_window_status_current="#I#[fg=$thm_gold,bg=""]$left_separator#[fg=$thm_gold,bg=""]#W"
 
     local show_session
-    readonly show_session=" #[fg=$thm_text] #[fg=$thm_text]#S "
+    readonly show_session=" #[fg=$thm_text]$current_session_icon #[fg=$thm_text]#S "
 
     local show_user
-    readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]"
+    readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
 
     local show_host
-    readonly show_host="$field_separator#[fg=$thm_text]#H#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]󰒋"
+    readonly show_host="$field_separator#[fg=$thm_text]#H#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$hostname_icon"
 
     local show_date_time
-    readonly show_date_time="$field_separator#[fg=$thm_foam]$date_time#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]󰃰"
+    readonly show_date_time="$field_separator#[fg=$thm_foam]$date_time#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$date_time_icon "
 
     local show_directory
-    readonly show_directory="$spacer#[fg=$thm_subtle] #[fg=$thm_rose]#{b:pane_current_path} "
+    readonly show_directory="$spacer#[fg=$thm_subtle]$current_folder_icon #[fg=$thm_rose]#{b:pane_current_path} "
 
     local show_directory_in_window_status
     readonly show_directory_in_window_status="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
 
     local show_directory_in_window_status_current
     readonly show_directory_in_window_status_current="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
+
+    # TODO: This needs some work and testing, rn I can't figure it out
+    # if [[ "$active_window_color" == "love" ]]; then
+    #     show_window_in_window_status_current="#[bg=$thm_love,bg=$thm_base]#I$left_separator#W"
+    # fi
+    # if [[ "$active_window_color" == "gold" ]]; then
+    #     show_window_in_window_status_current="#[bg=$thm_gold,bg=$thm_base]#I$left_separator#W"
+    # fi
+    # if [[ "$active_window_color" == "rose" ]]; then
+    #     show_window_in_window_status_current="#bg=$thm_rose,bg=$thm_base#I$left_separator#W"
+    # fi
+    # if [[ "$active_window_color" == "pine" ]]; then
+    #     show_window_in_window_status_current="#[bg=$thm_pine,bg=$thm_base]#I$left_separator#W"
+    # fi
+    # if [[ "$active_window_color" == "foam" ]]; then
+    #     show_window_in_window_status_current="#[bg=$thm_foam,bg=$thm_base]#I$left_separator#W"
+    # fi
+    # if [[ "$active_window_color" == "iris" ]]; then
+    #     show_window_in_window_status_current="#[bg=$thm_iris,bg=$thm_base]#I$left_separator#W"
+    # fi
 
     # Left column placement: Determined by the set status-left on line 231
 
@@ -256,7 +320,7 @@ main() {
     local current_window_width
     current_window_width=$(tmux display -p "#{window_width}")
 
-    if [[ "$prioritize_windows" == on ]]; then
+    if [[ "$prioritize_windows" == "on" ]]; then
         if [[ "$current_window_count" -gt "$user_window_count" || "$current_window_width" -lt "$user_window_width" ]]; then
             set status-left "$show_session$show_window$show_directory"
             # set status-right "$show_directory"
@@ -265,7 +329,12 @@ main() {
     else
         set status-right "$right_column"
     fi
-    # set -g status-interval 1
+
+    if [[ $window_status_separator != "  " ]]; then
+        setw window-status-separator "$window_status_separator" 
+    else
+        setw window-status-separator "  " 
+    fi
 
     setw window-status-format "$window_status_format"
     setw window-status-current-format "$window_status_current_format"
