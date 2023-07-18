@@ -120,7 +120,6 @@ main() {
     set display-panes-colour "${thm_gold}"
 
     # Windows
-    setw window-status-separator "  "
     setw window-status-style "fg=${thm_iris},bg=${thm_base}"
     setw window-status-activity-style "fg=${thm_base},bg=${thm_rose}"
     setw window-status-current-style "fg=${thm_gold},bg=${thm_base}"
