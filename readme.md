@@ -40,6 +40,7 @@ set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
 set -g @rose_pine_window_tabs_enabled 'on' # When active, show program instead of current directory
 set -g @rose_pine_bar_bg_disabls 'on' 
 # If set to 'on', disables background color, for transparent terminal emulators
+set -g @rose_pine_only_windows 'on' # Leaves only the window module, for max focus and space
 
 # Example values for these can be:
 set -g @rose_pine_left_separator ' > ' # The strings to use as separators are 1-space padded

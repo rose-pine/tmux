@@ -161,6 +161,11 @@ main() {
     local bar_bg_disable
     bar_bg_disable="$(get_tmux_option "@rose_pine_bar_bg_disable" "")"
     readonly bar_bg_disable
+    #
+    # Shows hostname of the computer the tmux session is run on
+    local only_windows
+    only_windows="$(get_tmux_option "@rose_pine_only_windows" "")"
+    readonly only_windows
 
     # Settings that allow user to choose their own icons and status bar behaviour
     # START
@@ -188,15 +193,19 @@ main() {
     current_folder_icon="$(get_tmux_option "@rose_pine_folder_icon" "")"
     readonly current_folder_icon
 
+    # Changes the icon / character that goes between each window's name in the bar
     local window_status_separator
     window_status_separator="$(get_tmux_option "@rose_pine_window_status_separator" "  ")"
 
+    # This setting does nothing by itself, it enables the 2 below it to toggle the simplified bar
     local prioritize_windows
     prioritize_windows="$(get_tmux_option "@rose_pine_prioritize_windows" "")"
 
+    # Allows the user to set a min width at which most of the bar elements hide, or
     local user_window_width
     user_window_width="$(get_tmux_option "@rose_pine_width_to_hide" "")"
 
+    # A number of windows, when over it, the bar gets simplified
     local user_window_count
     user_window_count="$(get_tmux_option "@rose_pine_window_count" "")"
 
@@ -329,10 +338,16 @@ main() {
         set status-right "$right_column"
     fi
 
-    if [[ $window_status_separator != "  " ]]; then
+    if [[ "$window_status_separator" != "  " ]]; then
         setw window-status-separator "$window_status_separator" 
     else
         setw window-status-separator "  " 
+    fi
+
+    # Leaves only the window list on the left side
+    if [[ "$only_windows" == "on" ]]; then
+        set status-left ""
+        set status-right ""
     fi
 
     setw window-status-format "$window_status_format"
