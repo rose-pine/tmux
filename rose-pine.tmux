@@ -34,6 +34,12 @@ setw() {
     tmux_commands+=(set-window-option -gq "$option" "$value" ";")
 }
 
+unset_option() {
+    local option=$1
+    local value=$2
+    tmux_commands+=(set-option -gu "$option" ";")
+}
+
 
 main() {
     local theme
@@ -146,10 +152,18 @@ main() {
     local directory
     directory="$(get_tmux_option "@rose_pine_directory" "")"
 
-    # Changes between directory or current program for the window name
-    local wt_enabled
-    wt_enabled="$(get_tmux_option "@rose_pine_window_tabs_enabled" "off")"
-    readonly wt_enabled
+    # WARN: Breaking changes here: Documentation needs to be updated
+    local show_current_program
+    show_current_program="$(get_tmux_option "@rose_pine_show_current_program" "")"
+    readonly show_current_program
+
+    local window_directory
+    window_directory="$(get_tmux_option "@rose_pine_show_pane_directory" "")"
+    readonly window_directory
+
+    local default_window_behavior
+    default_window_behavior="$(get_tmux_option "@rose_pine_default_window_behavior" "")"
+    readonly default_window_behavior
 
     # Changes the background color for the current active window
     # TODO: Together with line 251-269, end development for this feature
@@ -216,6 +230,7 @@ main() {
     left_separator="$(get_tmux_option "@rose_pine_left_separator" "  ")"
 
     local field_separator
+    # NOTE: Don't remove
     field_separator="$(get_tmux_option "@rose_pine_field_separator" " | " )"
 
     # END
@@ -242,7 +257,7 @@ main() {
     readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
 
     local show_host
-    readonly show_host="$field_separator#[fg=$thm_text]#H#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$hostname_icon"
+    readonly show_host="$spacer#[fg=$thm_text]#H#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$hostname_icon"
 
     local show_date_time
     readonly show_date_time=" #[fg=$thm_foam]$date_time#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$date_time_icon "
@@ -251,10 +266,11 @@ main() {
     readonly show_directory="$spacer#[fg=$thm_subtle]$current_folder_icon #[fg=$thm_rose]#{b:pane_current_path} "
 
     local show_directory_in_window_status
-    readonly show_directory_in_window_status="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
+    # BUG: It doesn't let the user pass through a custom window name
+    show_directory_in_window_status="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
 
     local show_directory_in_window_status_current
-    readonly show_directory_in_window_status_current="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
+    show_directory_in_window_status_current="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
 
     # TODO: This needs some work and testing, rn I can't figure it out
     # if [[ "$active_window_color" == "love" ]]; then
@@ -276,30 +292,42 @@ main() {
     #     show_window_in_window_status_current="#[bg=$thm_iris,bg=$thm_base]#I$left_separator#W"
     # fi
 
-    # Left column placement: Determined by the set status-left on line 231
+    # Left status column placement: Determined by the set status-left on line 344
 
-    # Right columns organization:
+    # Right status and organization:
 
-    # Right column shows nothing by default
+    # Right status shows nothing by default
     local right_column
 
-    # Window status by default shows the current directory basename
-    local window_status_format=$show_directory_in_window_status
-    local window_status_current_format=$show_directory_in_window_status_current
-
     # This if statement allows the bg colors to be null if the user decides so
+    # It sets the base colors for active / inactive, no matter the window appearence switcher choice
+    # TEST: This needs to be tested soon
     if [[ "$bar_bg_disable" == "on" ]]; then 
         set status-style "fg=$thm_pine,bg=0"
         show_window_in_window_status="#[fg=$thm_iris,bg=0]#I#[fg=$thm_iris,bg=0]$left_separator#[fg=$thm_iris,bg=0]#W"
         show_window_in_window_status_current="#[fg=$thm_gold,bg=0]#I#[fg=$thm_gold,bg=0]$left_separator#[fg=$thm_gold,bg=0]#W"
+        show_directory_in_window_status="#[fg=$thm_iris,bg=0]#I#[fg=$thm_iris,bg=0]$left_separator#[fg=$thm_iris,bg=0]#{b:pane_current_path}"
+        show_directory_in_window_status_current="#[fg=$thm_gold,bg=0]#I#[fg=$thm_gold,bg=0]$left_separator#[fg=$thm_gold,bg=0]#{b:pane_current_path}"
+        set window-status-style "fg=$thm_iris,bg=0"
+        set window-status-current-style "fg=$thm_gold,bg=0"
     fi
 
-    # This option toggles between the default (current directory for the window's pane)
-    # and the $wt_enabled option, which is the tmux default behaviour
-    # Will make it 2 options instead of 1 :)
-    if [[ "$wt_enabled" == "on" ]]; then
+    # Window appearence switcher: 3 options for the user
+    if [[ "$show_current_program" == "on" ]]; then
         window_status_format=$show_window_in_window_status
         window_status_current_format=$show_window_in_window_status_current
+        setw window-status-format "$window_status_format"
+        setw window-status-current-format "$window_status_current_format"
+    # See line 268 
+    elif [[ "$window_directory" ]]; then
+        local window_status_format=$show_directory_in_window_status
+        local window_status_current_format=$show_directory_in_window_status_current
+        setw window-status-format "$window_status_format"
+        setw window-status-current-format "$window_status_current_format"
+    # Base behaviour, but whit cool colors
+    elif [[ "$default_window_behavior" == "on" || "$default_window_behavior" == "" ]]; then
+        unset_option window-status-format
+        unset_option window-status-current-format
     fi
 
     if [[ "$user" == "on" ]]; then
@@ -328,6 +356,7 @@ main() {
     local current_window_width
     current_window_width=$(tmux display -p "#{window_width}")
 
+    # NOTE: Can possibly integrate the $only_windows mode into this
     if [[ "$prioritize_windows" == "on" ]]; then
         if [[ "$current_window_count" -gt "$user_window_count" || "$current_window_width" -lt "$user_window_width" ]]; then
             set status-left "$show_session$show_window$show_directory"
@@ -338,6 +367,7 @@ main() {
         set status-right "$right_column"
     fi
 
+    # Defaults to a NerdFont icon, user can change through an option
     if [[ "$window_status_separator" != "  " ]]; then
         setw window-status-separator "$window_status_separator" 
     else
@@ -350,8 +380,9 @@ main() {
         set status-right ""
     fi
 
-    setw window-status-format "$window_status_format"
-    setw window-status-current-format "$window_status_current_format"
+    # NOTE: Dont remove this, it can be useful for references
+    # setw window-status-format "$window_status_format"
+    # setw window-status-current-format "$window_status_current_format"
 
     # tmux integrated modes 
 

@@ -37,10 +37,14 @@ set -g @rose_pine_variant 'main' # Options are 'main', 'moon' or 'dawn'
 set -g @rose_pine_host 'on' # Enables hostname in the status bar
 set -g @rose_pine_date_time '' # It accepts the date UNIX command format (man date for info)
 set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
-set -g @rose_pine_window_tabs_enabled 'on' # When active, show program instead of current directory
-set -g @rose_pine_bar_bg_disabls 'on' 
+set -g @rose_pine_bar_bg_disable 'on' 
 # If set to 'on', disables background color, for transparent terminal emulators
 set -g @rose_pine_only_windows 'on' # Leaves only the window module, for max focus and space
+
+set -g @rose_pine_default_window_behavior 'on' # Forces tmux default window list behaviour
+set -g @rose_pine_show_current_program 'on' # Forces tmux to show the current running program as window name
+set -g @rose_pine_show_pane_directory 'on' # Forces tmux to show the current directory as 
+# Previously set -g @rose_pine_window_tabs_enabled
 
 # Example values for these can be:
 set -g @rose_pine_left_separator ' > ' # The strings to use as separators are 1-space padded
@@ -62,9 +66,10 @@ set -g @rose_pine_width_to_hide '80' # Specify a terminal width to toggle off mo
 set -g @rose_pine_window_count '5' # Specify a number of windows, if there are more than the number, do the same as width_to_hide
 ```
 - The separator options should go back to the defaults ( →, ← and | NerdFont characters) if the options are unset and you close all tmux sessions (a full restart)
-- Both the `@rose_pine_window_tabs_enabled` and `@rose_pine_bar_bg_disable` operate like the separators.
 - The `@rose_pine_width_to_hide` and `rose_pine_window_count` settings do not refresh automatically. They need to be refreshed manually, their current state is discussed [here](https://github.com/rose-pine/tmux/issues/10).
+- For `@rose_pine_window_tabs_enabled` and any further naming changes / notices, see issue #14.
 
+> This has been developed on tmux v3.2a on Pop_OS! (Ubuntu). If there are problems with other versions, do let me know
 
 
 ## Gallery
