@@ -152,7 +152,9 @@ main() {
     local directory
     directory="$(get_tmux_option "@rose_pine_directory" "")"
 
-    # WARN: Breaking changes here: Documentation needs to be updated
+    local disable_active_window_menu
+    disable_active_window_menu="$(get_tmux_option "@rose_pine_disable_active_window_menu" "")"
+
     local show_current_program
     show_current_program="$(get_tmux_option "@rose_pine_show_current_program" "")"
     readonly show_current_program
@@ -301,7 +303,7 @@ main() {
 
     # This if statement allows the bg colors to be null if the user decides so
     # It sets the base colors for active / inactive, no matter the window appearence switcher choice
-    # TEST: This needs to be tested soon
+    # TEST: This needs to be tested further
     if [[ "$bar_bg_disable" == "on" ]]; then 
         set status-style "fg=$thm_pine,bg=0"
         show_window_in_window_status="#[fg=$thm_iris,bg=0]#I#[fg=$thm_iris,bg=0]$left_separator#[fg=$thm_iris,bg=0]#W"
@@ -348,7 +350,12 @@ main() {
 
     set status-right "$right_column"
 
-    set status-left "$show_session$show_window"
+    if [[ "$disable_active_window_menu" == "on" ]]; then
+        set status-left "$show_session"
+    else
+        set status-left "$show_session$show_window"
+    fi
+
 
     local current_window_count
     current_window_count=$(tmux list-windows | wc -l)

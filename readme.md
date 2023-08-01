@@ -40,6 +40,7 @@ set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
 set -g @rose_pine_bar_bg_disable 'on' 
 # If set to 'on', disables background color, for transparent terminal emulators
 set -g @rose_pine_only_windows 'on' # Leaves only the window module, for max focus and space
+set -g @rose_pine_disable_active_window_menu 'on' # Disables the menu that shows the active window on the left
 
 set -g @rose_pine_default_window_behavior 'on' # Forces tmux default window list behaviour
 set -g @rose_pine_show_current_program 'on' # Forces tmux to show the current running program as window name
