@@ -110,7 +110,7 @@ main() {
     # Status bar
     set "status" "on"
     set status-style "fg=$thm_pine,bg=$thm_base"
-    set monitor-activity "on"
+    # set monitor-activity "on"
     set status-justify "left"
     set status-left-length "200"
     set status-right-length "200"
