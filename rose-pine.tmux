@@ -116,8 +116,8 @@ main() {
     set status-right-length "200"
 
     # Theoretically messages (need to figure out color placement) 
-    set message-style "fg=$thm_muted,bg=$thm_base,align=centre"
-    set message-command-style "fg=$thm_base,bg=$thm_gold,align=centre"
+    set message-style "fg=$thm_muted,bg=$thm_base"
+    set message-command-style "fg=$thm_base,bg=$thm_gold"
 
     # Pane styling
     set pane-border-style "fg=$thm_hl_high"
