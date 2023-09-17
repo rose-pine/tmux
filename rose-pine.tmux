@@ -177,7 +177,12 @@ main() {
     local bar_bg_disable
     bar_bg_disable="$(get_tmux_option "@rose_pine_bar_bg_disable" "")"
     readonly bar_bg_disable
-    #
+
+    # Transparent option for status bar
+    local bar_bg_disabled_color_option
+    bar_bg_disabled_color_option="$(get_tmux_option "@rose_pine_bar_bg_transparent_option" "0")"
+    readonly bar_bg_disabled_color_option
+
     # Shows hostname of the computer the tmux session is run on
     local only_windows
     only_windows="$(get_tmux_option "@rose_pine_only_windows" "")"
@@ -305,13 +310,13 @@ main() {
     # It sets the base colors for active / inactive, no matter the window appearence switcher choice
     # TEST: This needs to be tested further
     if [[ "$bar_bg_disable" == "on" ]]; then 
-        set status-style "fg=$thm_pine,bg=0"
-        show_window_in_window_status="#[fg=$thm_iris,bg=0]#I#[fg=$thm_iris,bg=0]$left_separator#[fg=$thm_iris,bg=0]#W"
-        show_window_in_window_status_current="#[fg=$thm_gold,bg=0]#I#[fg=$thm_gold,bg=0]$left_separator#[fg=$thm_gold,bg=0]#W"
-        show_directory_in_window_status="#[fg=$thm_iris,bg=0]#I#[fg=$thm_iris,bg=0]$left_separator#[fg=$thm_iris,bg=0]#{b:pane_current_path}"
-        show_directory_in_window_status_current="#[fg=$thm_gold,bg=0]#I#[fg=$thm_gold,bg=0]$left_separator#[fg=$thm_gold,bg=0]#{b:pane_current_path}"
-        set window-status-style "fg=$thm_iris,bg=0"
-        set window-status-current-style "fg=$thm_gold,bg=0"
+        set status-style "fg=$thm_pine,bg=$bar_bg_disabled_color_option"
+        show_window_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#W"
+        show_window_in_window_status_current="#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#W"
+        show_directory_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
+        show_directory_in_window_status_current="#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
+        set window-status-style "fg=$thm_iris,bg=$bar_bg_disabled_color_option"
+        set window-status-current-style "fg=$thm_gold,bg=$bar_bg_disabled_color_option"
     fi
 
     # Window appearence switcher: 3 options for the user

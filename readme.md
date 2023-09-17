@@ -47,6 +47,7 @@ set -g @rose_pine_date_time '' # It accepts the date UNIX command format (man da
 set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
 set -g @rose_pine_bar_bg_disable 'on' 
 # If set to 'on', disables background color, for transparent terminal emulators
+set -g @rose_pine_bar_bg_transparent_option '0' # If @rose_pine_bar_bg_disable is set to 'on', uses this value to set bg color
 set -g @rose_pine_only_windows 'on' # Leaves only the window module, for max focus and space
 set -g @rose_pine_disable_active_window_menu 'on' # Disables the menu that shows the active window on the left
 
