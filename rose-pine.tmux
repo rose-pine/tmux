@@ -180,7 +180,7 @@ main() {
 
     # Transparent option for status bar
     local bar_bg_disabled_color_option
-    bar_bg_disabled_color_option="$(get_tmux_option "@rose_pine_bar_bg_transparent_option" "0")"
+    bar_bg_disabled_color_option="$(get_tmux_option "@rose_pine_bar_bg_disabled_color_option" "0")"
     readonly bar_bg_disabled_color_option
 
     # Shows hostname of the computer the tmux session is run on
