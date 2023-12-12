@@ -188,6 +188,26 @@ main() {
     only_windows="$(get_tmux_option "@rose_pine_only_windows" "")"
     readonly only_windows
 
+    # Allows user to set a few custom sections (for integration with other plugins)
+    # Before the plugin's left section
+    local status_left_prepend_section
+    status_left_prepend_section="$(get_tmux_option "@rose_pine_status_left_prepend_section" "")"
+    readonly status_left_prepend_section
+    #
+    # after the plugin's left section
+    local status_left_append_section
+    status_left_append_section="$(get_tmux_option "@rose_pine_status_left_append_section" "")"
+    readonly status_left_append_section
+    # Before the plugin's right section
+    local status_right_prepend_section
+    status_right_prepend_section="$(get_tmux_option "@rose_pine_status_right_prepend_section" "")"
+    readonly status_right_prepend_section
+    #
+    # after the plugin's right section
+    local status_right_append_section
+    status_right_append_section="$(get_tmux_option "@rose_pine_status_right_append_section" "")"
+    readonly status_right_append_section
+
     # Settings that allow user to choose their own icons and status bar behaviour
     # START
     local current_window_icon
@@ -299,10 +319,11 @@ main() {
     #     show_window_in_window_status_current="#[bg=$thm_iris,bg=$thm_base]#I$left_separator#W"
     # fi
 
-    # Left status column placement: Determined by the set status-left on line 344
+    # Left status: Now moved to a variable called left_column 
+    # (we can append / prepend things to it)
+    local left_column
 
     # Right status and organization:
-
     # Right status shows nothing by default
     local right_column
 
@@ -331,6 +352,7 @@ main() {
         local window_status_current_format=$show_directory_in_window_status_current
         setw window-status-format "$window_status_format"
         setw window-status-current-format "$window_status_current_format"
+        #
     # Base behaviour, but whit cool colors
     elif [[ "$default_window_behavior" == "on" || "$default_window_behavior" == "" ]]; then
         unset_option window-status-format
@@ -353,25 +375,43 @@ main() {
         right_column=$right_column$show_directory
     fi
 
-    set status-right "$right_column"
-
+    # The append and prepend sections are for inter-plugin compatibility 
+    # and extension
     if [[ "$disable_active_window_menu" == "on" ]]; then
-        set status-left "$show_session"
+        left_column=$show_session
     else
-        set status-left "$show_session$show_window"
+        left_column=$show_session$show_window
+    fi
+    #
+    # Appending / Prepending custom user sections to 
+    if [[ "$status_left_prepend_section" != "" ]]; then
+        left_column=$status_left_prepend_section$left_column
+    fi
+    if [[ "$status_left_append_section" != "" ]]; then
+        left_column=$left_column$status_left_append_section$spacer 
+    fi
+    if [[ "$status_right_prepend_section" != "" ]]; then
+        right_column=$status_right_prepend_section$right_column
+    fi
+    if [[ "$status_right_append_section" != "" ]]; then
+        right_column=$right_column$status_right_append_section
     fi
 
+    # We set the sections
+    set status-left "$left_column"
+    set status-right "$right_column"
 
+    # Variable logic for the window prioritization
     local current_window_count
-    current_window_count=$(tmux list-windows | wc -l)
-
     local current_window_width
+
+    current_window_count=$(tmux list-windows | wc -l)
     current_window_width=$(tmux display -p "#{window_width}")
 
     # NOTE: Can possibly integrate the $only_windows mode into this
     if [[ "$prioritize_windows" == "on" ]]; then
         if [[ "$current_window_count" -gt "$user_window_count" || "$current_window_width" -lt "$user_window_width" ]]; then
-            set status-left "$show_session$show_window$show_directory"
+            set status-left "$left_column$show_directory"
             # set status-right "$show_directory"
             set status-right ""
         fi
@@ -391,6 +431,7 @@ main() {
         set status-left ""
         set status-right ""
     fi
+
 
     # NOTE: Dont remove this, it can be useful for references
     # setw window-status-format "$window_status_format"

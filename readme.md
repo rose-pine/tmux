@@ -57,7 +57,7 @@ set -g @rose_pine_disable_active_window_menu 'on' # Disables the menu that shows
 
 set -g @rose_pine_default_window_behavior 'on' # Forces tmux default window list behaviour
 set -g @rose_pine_show_current_program 'on' # Forces tmux to show the current running program as window name
-set -g @rose_pine_show_pane_directory 'on' # Forces tmux to show the current directory as 
+set -g @rose_pine_show_pane_directory 'on' # Forces tmux to show the current directory as window name
 # Previously set -g @rose_pine_window_tabs_enabled
 
 # Example values for these can be:
@@ -83,7 +83,20 @@ set -g @rose_pine_window_count '5' # Specify a number of windows, if there are m
 - The `@rose_pine_width_to_hide` and `rose_pine_window_count` settings do not refresh automatically. They need to be refreshed manually, their current state is discussed [here](https://github.com/rose-pine/tmux/issues/10).
 - For `@rose_pine_window_tabs_enabled` and any further naming changes / notices, see issue #14.
 
-> This has been developed on tmux v3.2a on Pop_OS! (Ubuntu). If there are problems with other versions, do let me know
+<br>
+
+6. Integration with other status-bar plugins
+- You can add, for example, the [tmux-mode-indicator](https://github.com/MunifTanjim/tmux-mode-indicator) plugin:
+```bash
+# Add to the beginning / end of the left and right sections your own.
+set -g @rose_pine_status_left_prepend_section '#{tmux_mode_indicator}'
+set -g @rose_pine_status_left_append_section 'It works'
+set -g @rose_pine_status_right_prepend_section 'with normal text'
+set -g @rose_pine_status_right_append_section 'too'
+```
+
+
+> This plugin is being developed and tested on tmux v3.2a on Pop_OS! (Ubuntu). If there are problems with other versions, do let me know.
 
 
 ## Gallery
