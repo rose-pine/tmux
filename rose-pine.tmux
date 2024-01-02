@@ -3,7 +3,7 @@
 # Rosé Pine - tmux theme
 #
 # Almost done, any bug found file a PR to rose-pine/tmux
-# 
+#
 # Inspired by dracula/tmux, catppucin/tmux & challenger-deep-theme/tmux
 #
 #
@@ -14,7 +14,7 @@ get_tmux_option() {
     option="$1"
     default="$2"
     value="$(tmux show-option -gqv "$option")"
-    
+
     if [ -n "$value" ]; then
         echo "$value"
     else
@@ -115,7 +115,7 @@ main() {
     set status-left-length "200"
     set status-right-length "200"
 
-    # Theoretically messages (need to figure out color placement) 
+    # Theoretically messages (need to figure out color placement)
     set message-style "fg=$thm_muted,bg=$thm_base"
     set message-command-style "fg=$thm_base,bg=$thm_gold"
 
@@ -319,7 +319,7 @@ main() {
     #     show_window_in_window_status_current="#[bg=$thm_iris,bg=$thm_base]#I$left_separator#W"
     # fi
 
-    # Left status: Now moved to a variable called left_column 
+    # Left status: Now moved to a variable called left_column
     # (we can append / prepend things to it)
     local left_column
 
@@ -330,7 +330,7 @@ main() {
     # This if statement allows the bg colors to be null if the user decides so
     # It sets the base colors for active / inactive, no matter the window appearence switcher choice
     # TEST: This needs to be tested further
-    if [[ "$bar_bg_disable" == "on" ]]; then 
+    if [[ "$bar_bg_disable" == "on" ]]; then
         set status-style "fg=$thm_pine,bg=$bar_bg_disabled_color_option"
         show_window_in_window_status="#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_iris,bg=$bar_bg_disabled_color_option]#W"
         show_window_in_window_status_current="#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#W"
@@ -338,6 +338,7 @@ main() {
         show_directory_in_window_status_current="#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#I#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]$left_separator#[fg=$thm_gold,bg=$bar_bg_disabled_color_option]#{b:pane_current_path}"
         set window-status-style "fg=$thm_iris,bg=$bar_bg_disabled_color_option"
         set window-status-current-style "fg=$thm_gold,bg=$bar_bg_disabled_color_option"
+        set window-status-activity-style "fg=$thm_rose,bg=$bar_bg_disabled_color_option"
     fi
 
     # Window appearence switcher: 3 options for the user
@@ -346,7 +347,7 @@ main() {
         window_status_current_format=$show_window_in_window_status_current
         setw window-status-format "$window_status_format"
         setw window-status-current-format "$window_status_current_format"
-    # See line 268 
+    # See line 268
     elif [[ "$window_directory" ]]; then
         local window_status_format=$show_directory_in_window_status
         local window_status_current_format=$show_directory_in_window_status_current
@@ -375,7 +376,7 @@ main() {
         right_column=$right_column$show_directory
     fi
 
-    # The append and prepend sections are for inter-plugin compatibility 
+    # The append and prepend sections are for inter-plugin compatibility
     # and extension
     if [[ "$disable_active_window_menu" == "on" ]]; then
         left_column=$show_session
@@ -383,12 +384,12 @@ main() {
         left_column=$show_session$show_window
     fi
     #
-    # Appending / Prepending custom user sections to 
+    # Appending / Prepending custom user sections to
     if [[ "$status_left_prepend_section" != "" ]]; then
         left_column=$status_left_prepend_section$left_column
     fi
     if [[ "$status_left_append_section" != "" ]]; then
-        left_column=$left_column$status_left_append_section$spacer 
+        left_column=$left_column$status_left_append_section$spacer
     fi
     if [[ "$status_right_prepend_section" != "" ]]; then
         right_column=$status_right_prepend_section$right_column
@@ -421,9 +422,9 @@ main() {
 
     # Defaults to a NerdFont icon, user can change through an option
     if [[ "$window_status_separator" != "  " ]]; then
-        setw window-status-separator "$window_status_separator" 
+        setw window-status-separator "$window_status_separator"
     else
-        setw window-status-separator "  " 
+        setw window-status-separator "  "
     fi
 
     # Leaves only the window list on the left side
@@ -437,7 +438,7 @@ main() {
     # setw window-status-format "$window_status_format"
     # setw window-status-current-format "$window_status_current_format"
 
-    # tmux integrated modes 
+    # tmux integrated modes
 
     setw clock-mode-colour "${thm_love}"
     setw mode-style "fg=${thm_gold}"
