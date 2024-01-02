@@ -339,6 +339,7 @@ main() {
         set window-status-style "fg=$thm_iris,bg=$bar_bg_disabled_color_option"
         set window-status-current-style "fg=$thm_gold,bg=$bar_bg_disabled_color_option"
         set window-status-activity-style "fg=$thm_rose,bg=$bar_bg_disabled_color_option"
+        set message-style "fg=$thm_muted,bg=$bar_bg_disabled_color_option"
     fi
 
     # Window appearence switcher: 3 options for the user
