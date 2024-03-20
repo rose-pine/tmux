@@ -64,6 +64,7 @@ set -g @rose_pine_show_pane_directory 'on' # Forces tmux to show the current dir
 set -g @rose_pine_left_separator ' > ' # The strings to use as separators are 1-space padded
 set -g @rose_pine_right_separator ' < ' # Accepts both normal chars & nerdfont icons
 set -g @rose_pine_field_separator ' | ' # Again, 1-space padding, it updates with prefix + I
+set -g @rose_pine_window_separator ' - ' # Replaces the default `:` between the window number and name
 
 # These are not padded
 set -g @rose_pine_session_icon '' # Changes the default icon to the left of the session name
