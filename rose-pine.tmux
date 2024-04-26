@@ -403,16 +403,16 @@ main() {
         right_column=$right_column$show_user
     fi
 
-    if [[ "$host" == "on" ]]; then
-        right_column=$right_column$show_host
-    fi
-
     if [[ "$ram" == "on" ]]; then
         right_column=$right_column$show_ram
     fi
 
     if [[ "$cpu" == "on" ]]; then
         right_column=$right_column$show_cpu
+    fi
+
+    if [[ "$host" == "on" ]]; then
+        right_column=$right_column$show_host
     fi
 
     if [[ "$date_time" != "" ]]; then
