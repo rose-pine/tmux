@@ -325,11 +325,11 @@ main() {
 
     local show_cpu
     local cpu_text="#(top -b -n1 | sed 's/,/./g' | grep 'Cpu(s)' | awk '{printf \"%.1f\\n\", \$2 + \$4}') %"
-    readonly show_cpu="$spacer#[fg=$thm_foam]$cpu_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$cpu_icon"
+    readonly show_cpu="$spacer#[fg=$thm_love]$cpu_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$cpu_icon"
 
     local show_ram
     local ram_text="#(free | awk '/Mem/{printf(\"%.1f\\n\"), \$3/\$2*100}') %"
-    readonly show_ram="$spacer#[fg=$thm_iris]$ram_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$ram_icon"
+    readonly show_ram="$spacer#[fg=$thm_gold]$ram_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$ram_icon"
 
     # TODO: This needs some work and testing, rn I can't figure it out
     # if [[ "$active_window_color" == "love" ]]; then
@@ -399,20 +399,20 @@ main() {
         unset_option window-status-current-format
     fi
 
-    if [[ "$ram" == "on" ]]; then
-        right_column=$right_column$show_ram
-    fi
-
-    if [[ "$cpu" == "on" ]]; then
-        right_column=$right_column$show_cpu
-    fi
-
     if [[ "$user" == "on" ]]; then
         right_column=$right_column$show_user
     fi
 
     if [[ "$host" == "on" ]]; then
         right_column=$right_column$show_host
+    fi
+
+    if [[ "$ram" == "on" ]]; then
+        right_column=$right_column$show_ram
+    fi
+
+    if [[ "$cpu" == "on" ]]; then
+        right_column=$right_column$show_cpu
     fi
 
     if [[ "$date_time" != "" ]]; then
