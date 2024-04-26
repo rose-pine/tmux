@@ -173,6 +173,12 @@ main() {
     default_window_behavior="$(get_tmux_option "@rose_pine_default_window_behavior" "")"
     readonly default_window_behavior
 
+    local ram 
+    ram="$(get_tmux_option "@rose_pine_ram" "")"
+    
+    local cpu 
+    cpu="$(get_tmux_option "@rose_pine_cpu" "")"
+
     # Changes the background color for the current active window
     # TODO: Together with line 251-269, end development for this feature
     # local active_window_color
@@ -239,6 +245,14 @@ main() {
     local current_folder_icon
     current_folder_icon="$(get_tmux_option "@rose_pine_folder_icon" "")"
     readonly current_folder_icon
+
+    local ram_icon
+    ram_icon="$(get_tmux_option "@rose_pine_ram_icon" "")"
+    readonly ram_icon
+
+    local cpu_icon
+    cpu_icon="$(get_tmux_option "@rose_pine_cpu_icon" "󰍛")"
+    readonly cpu_icon
 
     # Changes the icon / character that goes between each window's name in the bar
     local window_status_separator
@@ -308,6 +322,14 @@ main() {
 
     local show_directory_in_window_status_current
     show_directory_in_window_status_current="#I$left_separator#[fg=$thm_gold,bg=""]#{b:pane_current_path}"
+
+    local show_cpu
+    local cpu_text="#(top -b -n1 | sed 's/,/./g' | grep 'Cpu(s)' | awk '{printf \"%.1f\\n\", \$2 + \$4}')%"
+    readonly show_cpi="$spacer#[fg=$thm_foam]$cpu_text#[fg=thm_subtle]$right_separator]$cpu_icon"
+
+    local show_ram
+    local ram_text="#(top -b -n1 | sed 's/,/./g' | grep 'Cpu(s)' | awk '{printf \"%.1f\\n\", \$2 + \$4}')%"
+    readonly show_ram="$spacer#[fg=$thm_foam]$ram_text#[fg=thm_subtle]$right_separator]$ram_icon"
 
     # TODO: This needs some work and testing, rn I can't figure it out
     # if [[ "$active_window_color" == "love" ]]; then
@@ -392,6 +414,15 @@ main() {
     if [[ "$directory" == "on" ]]; then
         right_column=$right_column$show_directory
     fi
+
+    if [[ "$ram" == "on" ]]; then
+        right_column=$right_column$show_ram
+    fi
+
+    if [[ "$cpu" == "on" ]]; then
+        right_column=$right_column$show_cpu
+    fi
+
 
     # The append and prepend sections are for inter-plugin compatibility
     # and extension
