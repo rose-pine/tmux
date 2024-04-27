@@ -312,7 +312,7 @@ main() {
     readonly show_cpu="$spacer#[fg=$thm_love]$cpu_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$cpu_icon"
 
     local show_ram
-    local ram_text="#(free | awk '/Mem/{printf(\"%.1f\\n\"), \$3/\$2*100}') %"
+    local ram_text="#(free | awk '/Mem/{printf(\"%.1f\\n\"), (\$2-\$7)/\$2*100}') %"
     readonly show_ram="$spacer#[fg=$thm_gold]$ram_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$ram_icon"
 
     local show_host
