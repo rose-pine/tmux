@@ -309,7 +309,7 @@ main() {
 
     local show_cpu
     local cpu_text="#(top -b -n1 | sed 's/,/./g' | grep 'Cpu(s)' | awk '{printf \"%.1f\\n\", \$2 + \$4}') %"
-    readonly show_cpu="$spacer#[fg=$thm_pine]$cpu_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$cpu_icon"
+    readonly show_cpu="$spacer#[fg=$thm_gold]$cpu_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$cpu_icon"
 
     local show_ram
     local ram_text="#(free | awk '/Mem/{printf(\"%.1f\\n\"), (\$2-\$7)/\$2*100}') %"
