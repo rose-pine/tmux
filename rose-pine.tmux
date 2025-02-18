@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+/#!/usr/bin/env bash
 #
 # Rosé Pine - tmux theme
 #
@@ -309,11 +309,11 @@ main() {
 
     local show_cpu
     local cpu_text="#(top -b -n1 | sed 's/,/./g' | grep 'Cpu(s)' | awk '{printf \"%.1f\\n\", \$2 + \$4}') %"
-    readonly show_cpu="$spacer#[fg=$thm_gold]$cpu_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$cpu_icon"
+    readonly show_cpu="$spacer#[fg=$thm_gold]$cpu_text#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$cpu_icon"
 
     local show_ram
     local ram_text="#(free | awk '/Mem/{printf(\"%.1f\\n\"), (\$2-\$7)/\$2*100}') %"
-    readonly show_ram="$spacer#[fg=$thm_rose]$ram_text#[fg=thm_subtle]$right_separator#[fg=thm_subtle]$ram_icon"
+    readonly show_ram="$spacer#[fg=$thm_rose]$ram_text#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$ram_icon"
 
     local show_host
     readonly show_host="$spacer#[fg=$thm_text]#H#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$hostname_icon"
