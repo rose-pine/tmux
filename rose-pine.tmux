@@ -232,6 +232,10 @@ main() {
     hostname_icon="$(get_tmux_option "@rose_pine_hostname_icon" "󰒋")"
     readonly hostname_icon
 
+    local hostname_short
+    hostname_short="$(get_tmux_option "@rose_pine_hostname_short" "")"
+    readonly hostname_short
+
     local date_time_icon
     date_time_icon="$(get_tmux_option "@rose_pine_date_time_icon" "󰃰")"
     readonly date_time_icon
@@ -294,7 +298,14 @@ main() {
     readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
 
     local show_host
-    readonly show_host="$spacer#[fg=$thm_text]#H#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$hostname_icon"
+    local hostname
+    if [[ "$hostname_short" == "on" ]]; then
+        hostname="#h"
+    else
+        hostname="#H"
+    fi
+    readonly hostname
+    readonly show_host="$spacer#[fg=$thm_text]$hostname#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$hostname_icon"
 
     local show_date_time
     readonly show_date_time=" #[fg=$thm_foam]$date_time#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$date_time_icon "
