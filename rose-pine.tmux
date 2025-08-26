@@ -295,7 +295,7 @@ main() {
     readonly show_session=" #[fg=#{?client_prefix,$thm_love,$thm_text}]$current_session_icon #[fg=$thm_text]#S "
 
     local show_user
-    readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon"
+    readonly show_user="#[fg=$thm_iris]#(whoami)#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$username_icon "
 
     local show_host
     local hostname
@@ -305,7 +305,7 @@ main() {
         hostname="#H"
     fi
     readonly hostname
-    readonly show_host="$spacer#[fg=$thm_text]$hostname#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$hostname_icon"
+    readonly show_host="$spacer#[fg=$thm_text]$hostname#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$hostname_icon "
 
     local show_date_time
     readonly show_date_time=" #[fg=$thm_foam]$date_time#[fg=$thm_subtle]$right_separator#[fg=$thm_subtle]$date_time_icon "
