@@ -43,6 +43,7 @@ For updating the plugin, the key combination is <kbd>Prefix + U</kbd> (which TPM
 5. Optional but recommended: Activate the extra modules, they are enabled by writing 'on' after the option name
 ```bash
 set -g @rose_pine_host 'on' # Enables hostname in the status bar
+set -g @rose_pine_hostname_short 'on' # Makes the hostname shorter by using tmux's '#h' format
 set -g @rose_pine_date_time '' # It accepts the date UNIX command format (man date for info)
 set -g @rose_pine_user 'on' # Turn on the username component in the statusbar
 set -g @rose_pine_directory 'on' # Turn on the current folder component in the status bar
