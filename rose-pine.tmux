@@ -469,7 +469,7 @@ main() {
     # tmux integrated modes
 
     setw clock-mode-colour "${thm_love}"
-    setw mode-style "fg=${thm_gold}"
+    setw mode-style "bg=${thm_hl_med}"
 
     # Call everything to action
 
