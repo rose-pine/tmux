@@ -412,7 +412,7 @@ main() {
     if [[ "$disable_active_window_menu" == "on" ]]; then
         left_column=$show_session
     else
-        left_column=$show_session$field_separator$show_window
+        left_column=$show_session$field_separator$show_window$field_separator
     fi
     #
     # Appending / Prepending custom user sections to
