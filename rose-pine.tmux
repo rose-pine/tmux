@@ -410,7 +410,7 @@ main() {
     # The append and prepend sections are for inter-plugin compatibility
     # and extension
     if [[ "$disable_active_window_menu" == "on" ]]; then
-        left_column=$show_session
+        left_column=$show_session$field_separator
     else
         left_column=$show_session$field_separator$show_window$field_separator
     fi
