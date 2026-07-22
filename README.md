@@ -79,7 +79,7 @@ set -g @rose_pine_username_icon '' # Changes the default icon to the right of
 set -g @rose_pine_hostname_icon '󰒋' # Changes the default icon to the right of the hostname
 set -g @rose_pine_date_time_icon '󰃰' # Changes the default icon to the right of the date module
 
-# Very beta and specific opt-in settings, tested on v3.2a, look at issue #10
+# Very beta and specific opt-in settings, tested on v3.4, look at issue #10
 set -g @rose_pine_prioritize_windows 'on' # Disables the right side functionality in a certain window count / terminal width
 set -g @rose_pine_width_to_hide '80' # Specify a terminal width to toggle off most of the right side functionality
 set -g @rose_pine_window_count '5' # Specify a number of windows, if there are more than the number, do the same as width_to_hide
@@ -106,7 +106,7 @@ set -g @rose_pine_status_right_append_section 'too'
 - If you desire better window names (combining both directory and open programs), the plugin
 [tmux-window-name](https://github.com/ofirgall/tmux-window-name) works as intended, discussed and shown [here](https://github.com/rose-pine/tmux/issues/33).
 
-> This plugin is being developed and tested mainly on tmux v3.2a on Pop_OS! (Ubuntu). If there are problems with other versions, do let me know.
+> This plugin is being developed and tested mainly on tmux v3.4 on Pop_OS! (Ubuntu). If there are problems with other versions, do let me know.
 
 
 ## Gallery
