@@ -74,7 +74,7 @@ main() {
         thm_overlay="#f2e9e1";
         thm_muted="#9893a5";
         thm_subtle="#797593";
-        thm_text="#575279";
+        thm_text="#464261";
         thm_love="#b4637a";
         thm_gold="#ea9d34";
         thm_rose="#d7827e";
