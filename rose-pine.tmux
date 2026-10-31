@@ -446,8 +446,11 @@ main() {
     # NOTE: Can possibly integrate the $only_windows mode into this
     if [[ "$prioritize_windows" == "on" ]]; then
         if [[ "$current_window_count" -gt "$user_window_count" || "$current_window_width" -lt "$user_window_width" ]]; then
-            set status-left "$left_column$show_directory"
-            # set status-right "$show_directory"
+	    if [[ "$directory" == "on" ]]; then
+		set status-left "$left_column$show_directory"
+	    else
+		set status-left "$left_column"
+	    fi
             set status-right ""
         fi
     else
