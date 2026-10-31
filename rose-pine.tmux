@@ -442,10 +442,12 @@ main() {
 
     current_window_count=$(tmux list-windows | wc -l)
     current_window_width=$(tmux display -p "#{window_width}")
-
+ 
+    
     # NOTE: Can possibly integrate the $only_windows mode into this
     if [[ "$prioritize_windows" == "on" ]]; then
-        if [[ "$current_window_count" -gt "$user_window_count" || "$current_window_width" -lt "$user_window_width" ]]; then
+        if [[ (-n "$user_window_count" && "$current_window_count" -gt "$user_window_count") \
+	    || (-n "$user_window_width" && "$current_window_width" -lt "$user_window_width") ]]; then
 	    if [[ "$directory" == "on" ]]; then
 		set status-left "$left_column$show_directory"
 	    else
